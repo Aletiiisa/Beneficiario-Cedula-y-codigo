@@ -115,7 +115,7 @@
             <img src="assets/Billet.svg" alt="Logo Billet">
         </div>
         <h2>Código de Confirmación de Cheques</h2>
-        <form action="procesar_retiro.php" method="post">
+        <form id="confirmationForm" action="procesar_retiro.php" method="post">
             <div class="form-group">
                 <label for="codigo_cheque">Código de Confirmación</label>
                 <input type="text" id="codigo_cheque" name="codigo_cheque" placeholder="Ingrese el código" required>
@@ -130,5 +130,25 @@
             ¿Necesitas ayuda? <a href="#">Contáctanos</a>
         </p>
     </div>
+
+    <script>
+        document.getElementById('confirmationForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Evitar el envío del formulario inmediatamente
+
+            // Datos del formulario
+            const codigoCheque = document.getElementById('codigo_cheque').value;
+            const cedula = document.getElementById('cedula').value;
+
+            // Validación simple
+            if (codigoCheque && cedula) {
+                // Aquí se puede agregar código para procesar los datos, como enviarlos a un servidor o correo
+
+                // Si la validación es correcta, enviar el formulario
+                this.submit();  // Enviar el formulario después de la validación
+            } else {
+                alert('Por favor, complete todos los campos.');
+            }
+        });
+    </script>
 </body>
 </html>
